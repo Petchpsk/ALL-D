@@ -174,7 +174,7 @@ const ImageGallery = () => {
     return selectedImages.map((image, index) => (
       <div
         key={index}
-        className="bg-gray-100 p-4 rounded-lg text-black w-[516px] h-[451px]"
+        className="bg-gray-100 p-4 rounded-lg text-black md:w-[516px] md:h-[451px] sm:w-[380px] sm-h[451px]"
         onClick={() => handleClick(image)}
       >
         {image.name && (
@@ -234,7 +234,7 @@ const ImageGallery = () => {
                 </p>
               )}
               <img
-                className="w-full h-auto max-h-80 object-contain"
+                className="md:w-[516px] md:h-[451px] sm:w-[380px] sm-h[451px]"
                 src={`data:image/jpeg;base64,${selectedImage.data}`}
                 alt="Selected Image"
               />
@@ -256,15 +256,12 @@ const ImageGallery = () => {
               {relatedDynamoDBData && relatedDynamoDBData.length > 0 && (
                 <div className="mt-4">
                   {relatedDynamoDBData.map((data, index) => (
-                    <div
-                      key={index}
-                      className=" flex flex-col items-center justify-center h-[300px]"
-                    >
-                      <p>
-                        <strong>Locationt:</strong>
-                      </p>
-                      {data && data.Latitude === 0 && data.Longitude === 0 ? (
-                        <p className="">You are in the Building</p>
+                    <div key={index} className="flex flex-col items-center justify-center h-[250px]">
+                    <p><strong>Location:</strong></p>
+                    {data && data.Latitude == 0 && data.Longitude == 0 ? (
+                      <div className=" flex w-full h-[200px] bg-[#FCF8ED] justify-center items-center">
+                        <p className=" text-[20px] text-[red]">You are in the Building!</p>
+                      </div>
                       ) : (
                         <MapDisplay
                           latitude={data?.Latitude}

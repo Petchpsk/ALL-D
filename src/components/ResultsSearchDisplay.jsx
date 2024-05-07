@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "./SearchContext";
+import MapDisplay from "./MapDisplay";
 
 const ResultsDisplay = () => {
   const { filteredResults, searchTerm } = useContext(SearchContext);
@@ -74,7 +75,7 @@ const ResultsDisplay = () => {
             {matchedImages.map((imageData, index) => (
               <div
                 key={index}
-                className="bg-gray-100 p-4 rounded-lg cursor-pointer shadow w-[516px] h-[451px]"
+                className="bg-gray-100 p-4 rounded-lg cursor-pointer shadow md:w-[516px] md:h-[451px] sm:w-[380px] sm-h[451px]"
                 onClick={() => handleClick(imageData)}
               >
                 {imageData.name && (
@@ -85,7 +86,7 @@ const ResultsDisplay = () => {
                   </p>
                 )}
                 <img
-                  className="w-full h-auto object-cover"
+                  className="md:w-[516px] md:h-[451px] sm:w-[380px] sm-h[451px]"
                   src={`data:image/jpeg;base64,${imageData.data}`}
                   alt={`Image ${index}`}
                 />
@@ -154,22 +155,21 @@ const ResultsDisplay = () => {
             {relatedDynamoDBData && relatedDynamoDBData.length > 0 && (
               <div className="mt-4">
                 {relatedDynamoDBData.map((data, index) => (
-                  <div key={index} className="mt-2">
-                    <p>
-                      <strong>Latitude:</strong> {data.Latitude}
+                  <div key={index} className="flex flex-col items-center justify-center h-[250px]">
+                  <p><strong>Location:</strong></p>
+                  {data && data.Latitude == 0 && data.Longitude == 0 ? (
+                    <div className=" flex w-full h-[200px] bg-[#FCF8ED] justify-center items-center">
+                      <p className=" text-[20px] text-[red]">You are in the Building!</p>
+                    </div>
+                    ) : (
+                      <MapDisplay latitude={data?.Latitude} longitude={data?.Longitude} />
+                    )}
+                    <p className="text-center">
+                      <strong>Temperature:</strong> {data.temperature} °C
+                      <br />
+                      <strong>Humidity:</strong> {data.humidity}%
                     </p>
-                    <p>
-                      <strong>Longitude:</strong> {data.Longitude}
-                    </p>
-                    <p>
-                      <strong>Temperature:</strong> {data.temperature}
-                    </p>
-                    <p>
-                      <strong>Humidity:</strong> {data.humidity}
-                    </p>
-                    <p>
-                      <strong>UV Index:</strong> {data.UV}
-                    </p>
+                    <p><strong>UV Index:</strong> {data.UV}</p>
                   </div>
                 ))}
               </div>
