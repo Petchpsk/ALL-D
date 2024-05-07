@@ -152,7 +152,7 @@ const Mainpage = () => {
           <div className=" my-[10px]">
             <h1>Location</h1>
           </div>
-          {lastData && lastData.Latitude === 0 && lastData.Longitude == 0 ? (
+          {lastData && lastData.Latitude == 0 && lastData.Longitude == 0 ? (
             <p className="flex justify-center md:text-3xl ">
               You are in the Building
             </p>
