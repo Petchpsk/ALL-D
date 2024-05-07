@@ -195,11 +195,11 @@ const ImageGallery = () => {
 
   const category = () => {
     if (!selectedYear) {
-      return <p className="text-xl font-semibold text-center mb-2">Years:</p>;
+      return <p className="text-xl font-semibold text-center mb-2">Select Years:</p>;
     } else if (selectedYear && !selectedMonth) {
-      return <p className="text-xl font-semibold text-center mb-2">Months:</p>;
+      return <p className="text-xl font-semibold text-center mb-2">Select Months:</p>;
     } else if (selectedYear && selectedMonth && !selectedDate) {
-      return <p className="text-xl font-semibold text-center mb-2">Dates:</p>;
+      return <p className="text-xl font-semibold text-center mb-2">Select Dates:</p>;
     } else {
       return <p className="text-xl font-semibold text-center mb-2">Images:</p>;
     }

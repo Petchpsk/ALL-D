@@ -8,7 +8,7 @@ const DisplayAllImagesFromLocalStorage = () => {
   const [dynamoDBData, setDynamoDBData] = useState([]);
   const [relatedDynamoDBData, setRelatedDynamoDBData] = useState(null);
   const [favorites, setFavorites] = useState(() => {
-    const favsInLocalStorage = localStorage.getItem('favorites');
+    const favsInLocalStorage = localStorage.getItem("favorites");
     return favsInLocalStorage ? JSON.parse(favsInLocalStorage) : [];
   });
 
@@ -58,6 +58,17 @@ const DisplayAllImagesFromLocalStorage = () => {
     return { formattedDate, formattedTime };
   };
 
+  const groupImagesByDate = () => {
+    return imageDataArray.reduce((acc, image) => {
+      const { formattedDate } = formatDateTime(image.name);
+      if (!acc[formattedDate]) {
+        acc[formattedDate] = [];
+      }
+      acc[formattedDate].push(image);
+      return acc;
+    }, {});
+  };
+
   const handleClick = (imageData) => {
     setSelectedImage(imageData);
   };
@@ -67,47 +78,60 @@ const DisplayAllImagesFromLocalStorage = () => {
   };
 
   const handleFavorite = () => {
-    const index = favorites.findIndex(fav => fav.name === selectedImage.name);
+    const index = favorites.findIndex((fav) => fav.name === selectedImage.name);
     if (index >= 0) {
-      const newFavorites = [...favorites.slice(0, index), ...favorites.slice(index + 1)];
+      const newFavorites = [
+        ...favorites.slice(0, index),
+        ...favorites.slice(index + 1),
+      ];
       setFavorites(newFavorites);
-      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
     } else {
       const newFavorites = [...favorites, selectedImage];
       setFavorites(newFavorites);
-      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
     }
   };
 
-  const showimage = () => (
-    <div className="text-[black] flex flex-col items-center content-center">
-      <h2 className="text-xl font-semibold mb-4">All Images:</h2>
-      <div className="flex justify-center w-full h-full">
-        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-          {imageDataArray.map((imageData, index) => (
-            <div
-              key={index}
-              className="bg-gray-100 p-4 rounded-lg cursor-pointer shadow md:w-[516px] md:h-[451px] sm:w-[380px] sm-h[451px]"
-              onClick={() => handleClick(imageData)}
-            >
-              {imageData.name && (
-                <p className="text-center mb-2">
-                  Date: {formatDateTime(imageData.name).formattedDate}
-                  <br />
-                  Time: {formatDateTime(imageData.name).formattedTime}
-                </p>
-              )}
-              <img
-                className="w-full h-auto object-cover"
-                src={`data:image/jpeg;base64,${imageData.data}`}
-                alt={`Image ${index}`}
-              />
+  const showimage = () => {
+    const groupedImages = groupImagesByDate();
+    const sortedDates = Object.keys(groupedImages).sort((a, b) => new Date(b.split('/').reverse().join('-')) - new Date(a.split('/').reverse().join('-')));
+
+    return (
+      <div className="text-[black] flex flex-col items-center content-center">
+        <h2 className="text-xl font-semibold mb-4">All Images:</h2>
+        {sortedDates.map((date) => (
+          <div key={date}>
+            <div className="my-2">
+              <h3 className="text-lg font-semibold text-center">{date}</h3>
             </div>
-          ))}
-        </div>
+            <div className="flex justify-center w-full h-full">
+              <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+                {groupedImages[date].map((imageData, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-100 p-4 rounded-lg cursor-pointer shadow md:w-[516px] md:h-[451px] sm:w-[380px] sm-h[451px]"
+                    onClick={() => handleClick(imageData)}
+                  >
+                    {imageData.name && (
+                      <p className="text-center my-2">
+                        Time: {formatDateTime(imageData.name).formattedTime}
+                      </p>
+                    )}
+                    <img
+                      className="w-full h-auto object-contain"
+                      src={`data:image/jpeg;base64,${imageData.data}`}
+                      alt={`Image ${index}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <>
@@ -123,35 +147,55 @@ const DisplayAllImagesFromLocalStorage = () => {
               </p>
             )}
             <img
-              className="md:w-[516px] md:h-[451px] sm:w-[380px] sm-h[451px]"
+              className="w-full h-auto max-h-80 object-contain"
               src={`data:image/jpeg;base64,${selectedImage.data}`}
               alt="Selected Image"
             />
             <button
               onClick={handleFavorite}
               className="block w-full mt-2 px-4 py-2 text-white rounded-md"
-              style={{ backgroundColor: favorites.some(fav => fav.name === selectedImage.name) ? '#d9534f' : '#5cb85c' }}
+              style={{
+                backgroundColor: favorites.some(
+                  (fav) => fav.name === selectedImage.name
+                )
+                  ? "#d9534f"
+                  : "#5cb85c",
+              }}
             >
-              {favorites.some(fav => fav.name === selectedImage.name) ? 'Remove from Favorites' : 'Add to Favorites'}
+              {favorites.some((fav) => fav.name === selectedImage.name)
+                ? "Remove from Favorites"
+                : "Add to Favorites"}
             </button>
             {relatedDynamoDBData && relatedDynamoDBData.length > 0 && (
               <div className="mt-4">
                 {relatedDynamoDBData.map((data, index) => (
-                  <div key={index} className="flex flex-col items-center justify-center h-[250px]">
-                    <p><strong>Location:</strong></p>
+                  <div
+                    key={index}
+                    className="flex flex-col items-center justify-center h-[250px]"
+                  >
+                    <p>
+                      <strong>Location:</strong>
+                    </p>
                     {data && data.Latitude == 0 && data.Longitude == 0 ? (
                       <div className=" flex w-full h-[200px] bg-[#FCF8ED] justify-center items-center">
-                        <p className=" text-[20px] text-[red]">You are in the Building!</p>
+                        <p className=" text-[20px] text-[red]">
+                          You are in the Building!
+                        </p>
                       </div>
                     ) : (
-                      <MapDisplay latitude={data?.Latitude} longitude={data?.Longitude} />
+                      <MapDisplay
+                        latitude={data?.Latitude}
+                        longitude={data?.Longitude}
+                      />
                     )}
                     <p className="text-center">
                       <strong>Temperature:</strong> {data.temperature} °C
                       <br />
                       <strong>Humidity:</strong> {data.humidity}%
                     </p>
-                    <p><strong>UV Index:</strong> {data.UV}</p>
+                    <p>
+                      <strong>UV Index:</strong> {data.UV}
+                    </p>
                   </div>
                 ))}
               </div>
