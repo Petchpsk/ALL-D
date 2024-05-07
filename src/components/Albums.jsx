@@ -95,7 +95,7 @@ const ImageGallery = () => {
     return years.map((year) => (
       <div
         key={year}
-        className="bg-gradient-to-r from-cyan-500 to-blue-500 w-[400px] h-[500px] text-white p-4 rounded-lg cursor-pointer flex justify-center items-center my-4 mx-4"
+        className="bg-gradient-to-tr from-[#ecdea1] to-[#d3bb52] w-[400px] h-[500px] text-white p-4 rounded-lg cursor-pointer flex justify-center items-center my-4 mx-4"
         onClick={() => handleYearClick(year)}
       >
         {year}
@@ -120,7 +120,7 @@ const ImageGallery = () => {
     return months.map((month) => (
       <div
         key={month}
-        className="bg-gradient-to-r from-violet-500 to-fuchsia-500 w-[400px] h-[500px] text-white p-4 rounded-lg cursor-pointer flex justify-center items-center my-4 mx-4"
+        className="bg-gradient-to-r from-[#e9da9a] to-[#d8be49] w-[400px] h-[500px] text-white p-4 rounded-lg cursor-pointer flex justify-center items-center my-4 mx-4"
         onClick={() => handleMonthClick(month)}
       >
         {month}
@@ -162,7 +162,7 @@ const ImageGallery = () => {
     return dates.map((date) => (
       <div
         key={date}
-        className="bg-gradient-to-r from-purple-500 to-pink-500 w-[400px] h-[500px] text-white p-4 rounded-lg cursor-pointer flex justify-center items-center my-4 mx-4"
+        className="bg-gradient-to-r from-[#ecdea1] to-[#d3bb52] w-[400px] h-[500px] text-white p-4 rounded-lg cursor-pointer flex justify-center items-center my-4 mx-4"
         onClick={() => handleDateClick(date)}
       >
         {date}

@@ -6,7 +6,7 @@ import { MdOutlineWbSunny } from "react-icons/md";
 import { FaTemperatureHigh } from "react-icons/fa";
 import { TbTemperatureCelsius } from "react-icons/tb";
 import { WiHumidity } from "react-icons/wi";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Mainpage = () => {
   const [lastData, setLastData] = useState(null);
@@ -67,6 +67,7 @@ const Mainpage = () => {
           )}
         </div>
         <div className="flex 2xl:flex-row  2xl:w-screen 2xl:h-[600px] mb-[25px] items-center justify-center flex-col">
+        <NavLink to="/RecomUv">
           <div className="flex flex-col bg-[#FFC876] 2xl:w-[800px] 2xl:h-[600px] 2xl:my-0 2xl:mr-[50px] rounded-3xl  md:w-[800px] sm:h-[275px] sm:mb-[25px] sm:w-[300px]">
             <div className=" my-[10px]">
               <h1>UV Index</h1>
@@ -89,8 +90,10 @@ const Mainpage = () => {
               </div>
             </div>
           </div>
+          </NavLink>
           <div className="flex flex-col md:w-[800px] h-[600px] 2xl:ml-[50px] sm:w-[300px]">
             <div className=" flex flex-col bg-slate-600 md:w-[800px] h-[275px] rounded-3xl 2xl:mb-[25px] sm:w-[300px]">
+              <NavLink to="/RecomTemp">
               <div className=" my-[10px]">
                 <h1>Temperature</h1>
               </div>
@@ -117,8 +120,10 @@ const Mainpage = () => {
                   )}
                 </div>
               </div>
+              </NavLink>
             </div>
             <div className=" flex flex-col bg-[#87B3F6] md:w-[800px] h-[275px] rounded-3xl mt-[25px] sm:w-[300px]">
+            <NavLink to="/RecomTemp">
               <div className=" my-[10px]">
                 <h1>Humidity</h1>
               </div>
@@ -139,6 +144,7 @@ const Mainpage = () => {
                   )}
                 </div>
               </div>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -146,13 +152,16 @@ const Mainpage = () => {
           <div className=" my-[10px]">
             <h1>Location</h1>
           </div>
-          {lastData && (lastData.Latitude === 0 && lastData.Longitude == 0) ? (
-            <p className="flex justify-center md:text-3xl ">You are in the Building</p>
+          {lastData && lastData.Latitude === 0 && lastData.Longitude == 0 ? (
+            <p className="flex justify-center md:text-3xl ">
+              You are in the Building
+            </p>
           ) : (
-            <MapDisplay latitude={lastData?.Latitude} longitude={lastData?.Longitude} />
-          )
-          }
-
+            <MapDisplay
+              latitude={lastData?.Latitude}
+              longitude={lastData?.Longitude}
+            />
+          )}
         </div>
       </div>
       <Outlet />
