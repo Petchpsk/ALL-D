@@ -92,7 +92,7 @@ const Mainpage = () => {
           </div>
           </NavLink>
           <div className="flex flex-col md:w-[800px] h-[600px] 2xl:ml-[50px] sm:w-[300px]">
-            <div className=" flex flex-col bg-slate-600 md:w-[800px] h-[275px] rounded-3xl 2xl:mb-[25px] sm:w-[300px]">
+            <div className=" flex flex-col bg-[#9fe293] md:w-[800px] h-[275px] rounded-3xl 2xl:mb-[25px] sm:w-[300px] sm:mb-[25px]">
               <NavLink to="/RecomTemp">
               <div className=" my-[10px]">
                 <h1>Temperature</h1>
@@ -122,13 +122,13 @@ const Mainpage = () => {
               </div>
               </NavLink>
             </div>
-            <div className=" flex flex-col bg-[#87B3F6] md:w-[800px] h-[275px] rounded-3xl mt-[25px] sm:w-[300px]">
+            <div className=" flex flex-col bg-[#87B3F6] md:w-[800px] h-[275px] rounded-3xl  sm:w-[300px]">
             <NavLink to="/RecomTemp">
               <div className=" my-[10px]">
                 <h1>Humidity</h1>
               </div>
               <div className="flex md:w-[800px] h-full sm:w-[300px]">
-                <div className="items-center m-auto w-[400px] justify-center hidden sm:hidden md:block ">
+                <div className="items-center m-auto  w-[200px] justify-center hidden sm:hidden md:block">
                   <WiHumidity size="60%" />
                 </div>
                 <div className="items-center m-auto w-[150px] justify-center hiden md:hidden sm:block">
@@ -148,11 +148,11 @@ const Mainpage = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col bg-red-900 2xl:w-[800px] 2xl:h-[500px] 2xl:my-0 2xl:mr-[50px] rounded-3xl  md:w-[800px] sm:h-[375px] sm:mb-[25px] sm:w-[300px] ">
+        <div className="flex flex-col bg-[#c4c4b9] 2xl:w-[800px] 2xl:h-[500px] 2xl:my-0 2xl:mr-[50px] rounded-3xl  md:w-[800px] sm:h-[375px] sm:mb-[25px] sm:w-[300px] ">
           <div className=" my-[10px]">
             <h1>Location</h1>
           </div>
-          {lastData && lastData.Latitude == 0 && lastData.Longitude == 0 ? (
+          {lastData && lastData.Latitude === 0 && lastData.Longitude == 0 ? (
             <p className="flex justify-center md:text-3xl ">
               You are in the Building
             </p>
