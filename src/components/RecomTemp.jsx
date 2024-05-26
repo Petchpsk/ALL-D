@@ -1,5 +1,5 @@
 import React from 'react';
-import './temp.css';
+// import './temp.css';
 import human from './image/37half.png'; 
 import { Outlet } from "react-router-dom";
 

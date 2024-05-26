@@ -204,7 +204,7 @@ useEffect(() => {
                 label: 'Humidity',
                 data: humidityData,
                 borderColor: (context) => {
-                  return context.raw < 59 ? 'red' : 'rgba(75, 192, 192, 1)' && context.raw > 62 ? 'red' : 'rgba(75, 192, 192, 1)';
+                  return context.raw < 59 ? 'blue' : 'rgba(68, 95, 169, 1)' && context.raw > 62 ? 'red' : 'rgba(75, 192, 192, 1)';
                 },
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderWidth: 2 // กำหนดความหนาของเส้น
@@ -238,7 +238,7 @@ useEffect(() => {
                     }
                   },
                   color: function(context) {
-                    return context.tick.value < 59 ? 'red' : 'black' && context.tick.value > 62 ? 'red' : 'black';
+                    return context.tick.value < 59 ? 'blue' : 'black' && context.tick.value > 62 ? 'red' : 'black';
                   }
                 }
               }
@@ -359,7 +359,8 @@ useEffect(() => {
   };
 
   return (
-    <div className='body'>
+<>
+<div className='body'>
       <div className='topbar'>
         <label htmlFor="year" >Select Year: </label>
         <select id="year" name="year" onChange={handleYearChange} value={selectedYear}>
@@ -394,6 +395,8 @@ useEffect(() => {
         <canvas id="uvChart"></canvas>
       </div>
     </div>
+</>
+    
   );
 };
 

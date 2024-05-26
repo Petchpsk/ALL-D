@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import MapDisplay from "./MapDisplay";
 
+
 const ImageGallery = () => {
   const [imageDataArray, setImageDataArray] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);

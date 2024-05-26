@@ -1,5 +1,5 @@
 import React from 'react';
-import './uvstyles.css';
+// import './uvstyles.css';
 import chartuv from './image/uv.jpg';
 import { Outlet } from "react-router-dom";
 
