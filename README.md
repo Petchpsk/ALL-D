@@ -2,13 +2,13 @@
 เป็นเว็บแอพลิเคชั่นสำหรับการสืบค้นข้อมูลที่เก็บจากอุปกรณ์บันทึกชีวิต โดยข้อมูลถูกเก็บไว้บนAWS S3 Bucket และAWS DynamoDB พัฒนาเว็บแอพลิเคชั่นด้วย Reactjs และJavascript
 ## Directory tree
 -  src
-     	-   ALL-D
+  -   ALL-D
 -  doc
-	- 66-2_CS402-403_66-1_29_wdp-r2.pdf 
-	- 66-2_CS402-403_66-1_29_wdp-r2_abstract_th.txt
-	- 66-2_CS402-403_66-1_29_wdp-r2_abstract_en.txt
+  - 66-2_CS402-403_66-1_29_wdp-r2.pdf 
+  - 66-2_CS402-403_66-1_29_wdp-r2_abstract_th.txt
+  - 66-2_CS402-403_66-1_29_wdp-r2_abstract_en.txt
 -  demo
-    	- 66-2_CS402-403_66-1_29_wdp-r2_demo.mp4
+  - 66-2_CS402-403_66-1_29_wdp-r2_demo.mp4
 
 ## ขั้นตอนการติดตั้ง
 1. เข้าไปที่โฟลเดอร์ src
