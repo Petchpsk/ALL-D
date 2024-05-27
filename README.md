@@ -3,7 +3,6 @@
 ## Directory tree
 -  src
      -   ALL-D
-    -   
 -  doc
 	- 66-2_CS402-403_66-1_29_wdp-r2.pdf 
 	- 66-2_CS402-403_66-1_29_wdp-r2_abstract_th.txt
